@@ -1,0 +1,40 @@
+---
+import ThemeToggle from './ThemeToggle.tsx';
+
+const pathname = Astro.url.pathname;
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+---
+
+<header class="border-b border-zinc-200 dark:border-zinc-800">
+  <div class="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <a href="/" class="font-semibold tracking-tight">Your Name Here</a>
+    <nav class="flex items-center gap-4 text-sm" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'hover:underline',
+              isActive(link.href)
+                ? 'font-medium text-zinc-900 dark:text-zinc-50'
+                : 'text-zinc-600 dark:text-zinc-400',
+            ]}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <ThemeToggle client:load />
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const formattedDate = project.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={`${project.data.title} · Your Name Here`} description={project.data.description}>
+  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+    <a href="/projects" class="hover:underline">Projects</a>
+    <span aria-hidden="true"> / </span>
+    <span>{project.data.title}</span>
+  </p>
+
+  <header class="mt-4">
+    <h1 class="text-3xl font-semibold tracking-tight">{project.data.title}</h1>
+    <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+      <time datetime={project.data.date.toISOString()}>{formattedDate}</time>
+    </p>
+    {
+      project.data.tags && project.data.tags.length > 0 && (
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {project.data.tags.map((tag) => (
+            <li class="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      project.data.link && (
+        <p class="mt-4">
+          <a
+            href={project.data.link}
+            class="text-sm underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View project
+          </a>
+        </p>
+      )
+    }
+  </header>
+
+  {
+    project.data.image && (
+      <img
+        src={project.data.image}
+        alt={`Cover image for ${project.data.title}`}
+        class="mt-8 w-full rounded-lg border border-zinc-200 dark:border-zinc-800"
+      />
+    )
+  }
+
+  <article
+    class="mt-8 max-w-prose space-y-4 text-zinc-700 dark:text-zinc-300 [&_a]:underline [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-zinc-900 [&_h2]:dark:text-zinc-50 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5"
+  >
+    <Content />
+  </article>
+</Base>
