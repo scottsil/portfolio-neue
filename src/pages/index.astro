@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Your Name Here"
+  description="Placeholder one-line tagline — replace this before publishing."
+>
+  <section class="flex flex-col gap-6 sm:flex-row sm:items-center">
+    <img
+      src="/avatar.svg"
+      alt="Placeholder headshot graphic — replace this before publishing"
+      width="96"
+      height="96"
+      class="h-24 w-24 rounded-full border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900"
+    />
+    <div>
+      <p class="text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        Portfolio
+      </p>
+      <h1 class="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">Your Name Here</h1>
+      <p class="mt-2 text-lg text-zinc-600 dark:text-zinc-300">
+        Placeholder one-line tagline — replace this before publishing.
+      </p>
+    </div>
+  </section>
+
+  <p class="mt-8 max-w-prose text-zinc-700 dark:text-zinc-300">
+    Placeholder intro paragraph — replace this before publishing. A short teaser about who
+    you are, the kind of work you do, and what someone should look at next.
+  </p>
+
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a
+      href="/projects"
+      class="inline-flex items-center rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+    >
+      View projects
+    </a>
+    <a
+      href="/about"
+      class="inline-flex items-center rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+    >
+      About me
+    </a>
+  </div>
+</Base>

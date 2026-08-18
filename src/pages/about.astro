@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+
+const skills = [
+  'Astro',
+  'TypeScript',
+  'React',
+  'Tailwind CSS',
+  'Placeholder skill — replace this',
+];
+---
+
+<Base
+  title="About · Your Name Here"
+  description="Placeholder about page description — replace this before publishing."
+>
+  <h1 class="text-3xl font-semibold tracking-tight">About</h1>
+
+  <div class="mt-6 max-w-prose space-y-4 text-zinc-700 dark:text-zinc-300">
+    <p>Placeholder bio paragraph — replace this before publishing.</p>
+    <p>
+      Placeholder second bio paragraph — replace this before publishing. Add a bit more
+      about your background, what you like working on, and how you approach projects.
+    </p>
+  </div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-semibold tracking-tight">Skills / tools</h2>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        skills.map((skill) => (
+          <li class="rounded-full border border-zinc-200 px-3 py-1 text-sm dark:border-zinc-800">
+            {skill}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-semibold tracking-tight">Contact</h2>
+    <ul class="mt-4 space-y-2 text-zinc-700 dark:text-zinc-300">
+      <li>
+        Email:
+        <a class="underline" href="mailto:your.email@example.com">your.email@example.com</a>
+      </li>
+      <li>
+        LinkedIn:
+        <a class="underline" href="https://linkedin.com/in/your-profile">
+          linkedin.com/in/your-profile
+        </a>
+      </li>
+      <li>
+        GitHub:
+        <a class="underline" href="https://github.com/your-username">
+          github.com/your-username
+        </a>
+      </li>
+    </ul>
+  </section>
+</Base>
